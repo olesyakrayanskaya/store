@@ -1,0 +1,6 @@
+addEventListener('DOMContentLoaded', () => {
+});
+
+function getData() {
+
+}
