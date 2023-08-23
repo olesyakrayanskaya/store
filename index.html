@@ -1,38 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <title>Store</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="cart">
+      <div class="cart__inner">
+        <header class="cart__header">
+          <span class="cart__close">&#x2715;</span>
+        </header>
+        <h3 class="cart__title">Items in the cart:</h3>
+        <div class="cart__items"></div>
+        <footer class="cart__footer"></footer>
+      </div>
+    </div>
     <header class="header">
-        <div class="container">
-            <div class="logo">Logo</div>
-            <nav class="nav">
-                <a class="nav__link" href="">About</a>
-                <a class="nav__link" href="" target="_blank">Catalog</a>
-                <a class="nav__link" href="">Delivery</a>
-                <a class="nav__link" href="">Contacts</a>
-            </nav>
-            <img src="./cart.svg" alt="cart" class="cart">            
-        </div>
+      <div class="container">
+        <div class="logo">Logo</div>
+        <nav class="nav">
+          <a class="nav__link" href="">About</a>
+          <a class="nav__link" href="" target="_blank">Catalog</a>
+          <a class="nav__link" href="">Delivery</a>
+          <a class="nav__link" href="">Contacts</a>
+        </nav>
+        <img src="./cart.svg" alt="cart" class="cart-icon" />
+      </div>
     </header>
     <main class="main">
-        <div class="main__container">
-            <div class="main__filters">
-                Lorem ipsum dolor sit amet.
-            </div>
-            <div class="main__items">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
-            </div>
-        </div>
+      <div class="main__container">
+        <div class="main__filters">Lorem ipsum dolor sit amet.</div>
+        <div class="main__items"></div>
+      </div>
     </main>
     <footer class="footer">
-        <div class="container"></div>
-    </footer>    
-</body>
-<script src="./index.js"></script>
+      <div class="container"></div>
+    </footer>
+  </body>
+  <script src="./index.js"></script>
 </html>
