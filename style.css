@@ -80,6 +80,8 @@ body {
 
 .cart-icon {
   cursor: pointer;
+  width: 24px;
+  height: 24px;
 }
 
 .nav__link:hover {
