@@ -62,7 +62,7 @@ const dataItems = [
 ];
 
 const dataMap = new Map();
-const itemsInCart = new Set();
+const itemsInCart = new Map();
 
 dataItems.forEach((elem) =>
   dataMap.set(elem.id, {
@@ -73,7 +73,7 @@ dataItems.forEach((elem) =>
 );
 
 addEventListener('DOMContentLoaded', () => {
-  dataMap.forEach((value, key, map) => createItem(value, key));
+  dataMap.forEach((value, key, dataMap) => createItem(value, key));
   openCart();
   closeCart();
   const btnAddToCartArr = document.querySelectorAll('.item__btn');
@@ -116,7 +116,9 @@ function openCart() {
   const cartWindow = document.querySelector('.cart');
   const openCart = document.querySelector('.cart-icon');
   openCart.addEventListener('click', () => {
+    clearCartItems();
     renderCart();
+    totalSum();
     cartWindow.style.display = 'flex';
   });
 }
@@ -135,14 +137,20 @@ function closeCart() {
   };
 }
 
-function addToCart(id) {
-  itemsInCart.add(id);
+function addToCart(id, amount = 1) {
+  itemsInCart.set(id, amount);
 }
 
 function removeAllInCart() {
+  clearCartItems();
+  itemsInCart.clear();
+  const totalSumItem = document.querySelector('.cart__sum');
+  totalSumItem.innerHTML = 0;
+}
+
+function clearCartItems() {
   const cartItems = document.querySelector('.cart__items');
   removeAllChildNodes(cartItems);
-  itemsInCart.clear();
 }
 
 function removeAllChildNodes(parent) {
@@ -152,8 +160,7 @@ function removeAllChildNodes(parent) {
 }
 
 function renderCart() {
-  itemsInCart.forEach((id) => {
-    let amount = 1;
+  itemsInCart.forEach((amount, id, itemsInCart) => {
     const cartItems = document.querySelector('.cart__items');
     const cartItem = document.createElement('div');
     cartItem.className = 'cart__item item';
@@ -177,11 +184,14 @@ function renderCart() {
     itemMinus.addEventListener('click', () => {
       if (amount > 1) {
         amount -= 1;
+        cartItemAmount.innerHTML = amount;
+        itemsInCart.set(id, amount);
       } else {
         itemsInCart.delete(id);
         cartItem.remove();
       }
       cartItemAmount.innerHTML = amount;
+      totalSum();
     });
     const itemPlus = document.createElement('button');
     itemPlus.className = 'item__plus';
@@ -190,6 +200,8 @@ function renderCart() {
     itemPlus.addEventListener('click', () => {
       amount += 1;
       cartItemAmount.innerHTML = amount;
+      itemsInCart.set(id, amount);
+      totalSum();
     });
     const itemDel = document.createElement('button');
     itemDel.className = 'item__delete';
@@ -198,8 +210,18 @@ function renderCart() {
     itemDel.addEventListener('click', () => {
       itemsInCart.delete(id);
       cartItem.remove();
+      totalSum();
     });
   });
+}
+
+function totalSum() {
+  const sumItem = document.querySelector('.cart__sum');
+  let totalSum = 0;
+  itemsInCart.forEach((amount, id, itemsInCart) => {
+    totalSum += dataMap.get(+id).price * amount;
+  });
+  sumItem.innerHTML = totalSum;
 }
 
 function clearCart() {
