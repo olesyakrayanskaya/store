@@ -123,7 +123,6 @@ const dataItems = [
 ];
 
 const dataMap = new Map();
-const itemsInCart = new Map();
 
 dataItems.forEach((elem) =>
   dataMap.set(elem.id, {
@@ -132,6 +131,14 @@ dataItems.forEach((elem) =>
     description: elem.description,
   })
 );
+
+const localStorageMap = new Map();
+for(let i=0; i<localStorage.length; i++) {
+  let key = localStorage.key(i);
+  localStorageMap.set(`${key}`, `${localStorage.getItem(key)}`);
+};
+
+const itemsInCart = new Map(localStorageMap);
 
 addEventListener('DOMContentLoaded', () => {
   dataMap.forEach((value, key) => createItem(value, key));
@@ -267,6 +274,7 @@ function closeCart() {
 
 function addToCart(id, amount = 1) {
   itemsInCart.set(id, amount);
+  localStorage.setItem(id, amount);
 }
 
 function removeAllInCart() {
@@ -274,6 +282,7 @@ function removeAllInCart() {
   itemsInCart.clear();
   const totalSumItem = document.querySelector('.cart__sum');
   totalSumItem.innerHTML = 0;
+  localStorage.clear();
 }
 
 function clearCartItems() {
@@ -314,9 +323,11 @@ function renderCart() {
         amount -= 1;
         cartItemAmount.innerHTML = amount;
         itemsInCart.set(id, amount);
+        localStorage.setItem(id, amount);
       } else {
         itemsInCart.delete(id);
         cartItem.remove();
+        localStorage.removeItem(id);
       }
       cartItemAmount.innerHTML = amount;
       totalSum();
@@ -329,6 +340,7 @@ function renderCart() {
       amount += 1;
       cartItemAmount.innerHTML = amount;
       itemsInCart.set(id, amount);
+      localStorage.setItem(id, amount);
       totalSum();
     });
     const itemDel = document.createElement('button');
@@ -339,6 +351,7 @@ function renderCart() {
       itemsInCart.delete(id);
       cartItem.remove();
       totalSum();
+      localStorage.removeItem(id);
     });
   });
 }
@@ -350,8 +363,4 @@ function totalSum() {
     totalSum += dataMap.get(+id).price * amount;
   });
   sumItem.innerHTML = totalSum;
-}
-
-function clearCart() {
-  localStorage.clear();
 }
