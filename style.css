@@ -115,6 +115,18 @@ body {
   align-items: flex-start;
 }
 
+.item__img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.item-cart__img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
 .item__footer {
   display: flex;
   flex-direction: row;
