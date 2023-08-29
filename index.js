@@ -59,6 +59,66 @@ const dataItems = [
     price: 15,
     description: 'description-10',
   },
+  {
+    id: 11,
+    name: 'item-11',
+    price: 37,
+    description: 'description-11',
+  },
+  {
+    id: 12,
+    name: 'item-12',
+    price: 26,
+    description: 'description-12',
+  },
+  {
+    id: 13,
+    name: 'item-13',
+    price: 45,
+    description: 'description-13',
+  },
+  {
+    id: 14,
+    name: 'item-14',
+    price: 25,
+    description: 'description-14',
+  },
+  {
+    id: 15,
+    name: 'item-15',
+    price: 27,
+    description: 'description-15',
+  },
+  {
+    id: 16,
+    name: 'item-16',
+    price: 22,
+    description: 'description-16',
+  },
+  {
+    id: 17,
+    name: 'item-17',
+    price: 44,
+    description: 'description-17',
+  },
+  {
+    id: 18,
+    name: 'item-18',
+    price: 11,
+    description: 'description-18',
+  },
+  {
+    id: 19,
+    name: 'item-19',
+    price: 23,
+    description: 'description-19',
+  },
+  {
+    id: 20,
+    name: 'item-20',
+    price: 24,
+    description: 'description-20',
+  },
 ];
 
 const dataMap = new Map();
@@ -72,8 +132,37 @@ dataItems.forEach((elem) =>
   })
 );
 
+let sortedMap = new Map();
+
+const select = document.getElementById('sort');
+select.addEventListener('change', function () {
+  let selectValue = this.value;
+  switch (selectValue) {
+    case 'name':
+      sortedMap = [...dataMap.entries()].sort((a, b) =>
+        a[1].name.localeCompare(b[1].name)
+      );
+      break;
+    case 'ascending price':
+      sortedMap = [...dataMap.entries()].sort(
+        (a, b) => a[1].price - b[1].price
+      );
+      break;
+    case 'descending price':
+      sortedMap = [...dataMap.entries()].sort(
+        (a, b) => b[1].price - a[1].price
+      );
+      break;
+    default:
+      sortedMap = [...dataMap.entries()];
+  }
+  const mainItems = document.querySelector('.main__items');
+  removeAllChildNodes(mainItems);
+  sortedMap.forEach((value, key) => createItem(value[1], key));
+});
+
 addEventListener('DOMContentLoaded', () => {
-  dataMap.forEach((value, key, dataMap) => createItem(value, key));
+  dataMap.forEach((value, key) => createItem(value, key));
   openCart();
   closeCart();
   const btnAddToCartArr = document.querySelectorAll('.item__btn');

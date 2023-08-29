@@ -35,7 +35,15 @@
     </header>
     <main class="main">
       <div class="main__container">
-        <div class="main__filters">Lorem ipsum dolor sit amet.</div>
+        <div class="main__filters">
+          <label for="">sort by</label>
+          <select class="main__sort sort" name="sort" id="sort">
+            <option class="sort_value" value="">add</option>
+            <option class="sort_value" value="name">name</option>
+            <option class="sort_value" value="ascending price">ascending price</option>
+            <option class="sort_value" value="descending price">descending price</option>
+          </select>
+        </div>
         <div class="main__items"></div>
       </div>
     </main>
