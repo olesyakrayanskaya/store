@@ -132,20 +132,6 @@ dataItems.forEach((elem) =>
     description: elem.description,
   })
 );
-// const range = document.querySelector('.filters__range');
-// const minPriceSpan = document.querySelector('.filter__min-price');
-// const maxPriceSpan = document.querySelector('.filter__max-price');
-// sortedMap = [...dataMap.entries()].sort(
-//   (a, b) => a[1].price - b[1].price
-// );
-// let minPrice = sortedMap[0][1].price;
-// let maxPrice = sortedMap[sortedMap.length - 1][1].price;
-// minPriceSpan.innerHTML = minPrice;
-// maxPriceSpan.innerHTML = maxPrice;
-// range.addEventListener('change', () => {
-//   const filterItems = sortedMap.values().filter((item) => {item[1].price <= range.value})
-//   console.log(filterItems);
-// });
 
 addEventListener('DOMContentLoaded', () => {
   dataMap.forEach((value, key) => createItem(value, key));
@@ -190,6 +176,34 @@ select.addEventListener('change', () => {
   const mainItems = document.querySelector('.main__items');
   removeAllChildNodes(mainItems);
   sortedMap.forEach((value, key) => createItem(value[1], value[0]));
+  const btnAddToCartArr = document.querySelectorAll('.item__btn');
+  btnAddToCartArr.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      let id = btn.id;
+      addToCart(id);
+    });
+  });
+  const removeAllInCartBtn = document.querySelector('.cart__remove');
+  removeAllInCartBtn.addEventListener('click', () => {
+    removeAllInCart();
+  });
+});
+
+const range = document.querySelector('.filters__range');
+const minPriceSpan = document.querySelector('.filter__min-price');
+const maxPriceSpan = document.querySelector('.filter__max-price');
+sortedMap = [...dataMap.entries()].sort((a, b) => a[1].price - b[1].price);
+let minPrice = sortedMap[0][1].price;
+let maxPrice = sortedMap[sortedMap.length - 1][1].price;
+minPriceSpan.innerHTML = minPrice;
+maxPriceSpan.innerHTML = maxPrice;
+range.addEventListener('change', () => {
+  const filterItems = [...dataMap.entries()]
+    .sort((a, b) => a[1].price - b[1].price)
+    .filter((el) => el[1].price <= range.value);
+  const mainItems = document.querySelector('.main__items');
+  removeAllChildNodes(mainItems);
+  filterItems.forEach((value, key) => createItem(value[1], value[0]));
   const btnAddToCartArr = document.querySelectorAll('.item__btn');
   btnAddToCartArr.forEach((btn) => {
     btn.addEventListener('click', () => {
