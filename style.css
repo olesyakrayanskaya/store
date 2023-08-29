@@ -94,11 +94,13 @@ body {
 
 .main__items {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   gap: 10px;
   align-items: center;
   align-content: center;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .main__item {
@@ -127,14 +129,13 @@ body {
 
 .main__container {
   display: grid;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: 25% 1fr;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.main__filters {
+.filters {
   background-color: #b9c6c7;
-  height: calc(100vh - 160px);
 }
 
 .footer {

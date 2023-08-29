@@ -35,14 +35,30 @@
     </header>
     <main class="main">
       <div class="main__container">
-        <div class="main__filters">
+        <div class="filters">
           <label for="">sort by</label>
-          <select class="main__sort sort" name="sort" id="sort">
+          <select class="filters__sort sort" name="sort" id="sort">
             <option class="sort_value" value="">add</option>
             <option class="sort_value" value="name">name</option>
-            <option class="sort_value" value="ascending price">ascending price</option>
-            <option class="sort_value" value="descending price">descending price</option>
+            <option class="sort_value" value="ascending price">
+              ascending price
+            </option>
+            <option class="sort_value" value="descending price">
+              descending price
+            </option>
           </select>
+          <div class="filters__price-range">
+            <label for="price-range">price: </label>
+            <span class="filter__min-price"></span>
+            <input
+              class="filters__range"
+              id="price-range"
+              type="range"
+              min="10"
+              max="50"
+            />
+            <span class="filter__max-price"></span>
+          </div>
         </div>
         <div class="main__items"></div>
       </div>
