@@ -33,7 +33,7 @@ const dataItems = [
     name: 'item-5',
     price: 15,
     description: 'description-5',
-    img: './images/5.avif',
+    img: './images/5.webp',
   },
   {
     id: 6,
