@@ -153,6 +153,47 @@ dataItems.forEach((elem) =>
   })
 );
 
+const totalNumbItems = dataItems.length;
+const showItems = 6;
+let firstIndex = 0;
+let lastIndex = showItems;
+
+function createShowItems(arr) {
+  for (let i = firstIndex; i < lastIndex; i++) {
+    createItem(arr[i]);
+  }
+}
+
+function createBtnShowMoreItems() {
+  if (totalNumbItems > showItems) {
+    const mainItems = document.querySelector('.main__items');
+    const btnShowMoreItems = document.createElement('button');
+    btnShowMoreItems.className = 'main__btn';
+    btnShowMoreItems.innerHTML = 'more products';
+    mainItems.append(btnShowMoreItems);
+  }
+}
+
+function showMoreItems(arr) {
+  const btnShowMoreItems = document.querySelector('.main__btn');
+
+  btnShowMoreItems.addEventListener('click', () => {
+    if (firstIndex < totalNumbItems - showItems) {
+      firstIndex += showItems;
+    } else {
+      firstIndex = totalNumbItems;
+      btnShowMoreItems.remove();
+    }
+    if (lastIndex < totalNumbItems - showItems) {
+      lastIndex += showItems;
+    } else {
+      lastIndex = totalNumbItems;
+      btnShowMoreItems.remove();
+    }
+    createShowItems(arr);
+  });
+}
+
 const localStorageMap = new Map();
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
@@ -164,10 +205,12 @@ const amountItemsInCart = document.querySelector('.cart-amount');
 amountItemsInCart.innerHTML = itemsInCart.size;
 
 addEventListener('DOMContentLoaded', () => {
-  dataMap.forEach((value, key) => createItem(value, key));
+  createShowItems(dataItems);
   openCart();
   closeCart();
   addRemoveItemsInCart();
+  createBtnShowMoreItems();
+  showMoreItems(dataItems);
 });
 
 function addRemoveItemsInCart() {
@@ -184,36 +227,34 @@ function addRemoveItemsInCart() {
   });
 }
 
-let sortedMap = new Map();
+let sortedArray = [];
 const select = document.getElementById('sort');
 select.addEventListener('change', () => {
   let selectValue = select.value;
   switch (selectValue) {
     case 'name':
-      sortedMap = [...dataMap.entries()].sort((a, b) =>
-        a[1].name.localeCompare(b[1].name)
-      );
+      sortedArray = [...dataItems].sort((a, b) => a.name.localeCompare(b.name));
       break;
     case 'ascending price':
-      sortedMap = [...dataMap.entries()].sort(
-        (a, b) => a[1].price - b[1].price
-      );
+      sortedArray = [...dataItems].sort((a, b) => a.price - b.price);
       break;
     case 'descending price':
-      sortedMap = [...dataMap.entries()].sort(
-        (a, b) => b[1].price - a[1].price
-      );
+      sortedArray = [...dataItems].sort((a, b) => b.price - a.price);
       break;
     default:
-      sortedMap = [...dataMap.entries()];
+      sortedArray = [...dataItems];
   }
   const mainItems = document.querySelector('.main__items');
   removeAllChildNodes(mainItems);
-  sortedMap.forEach((value, key) => createItem(value[1], value[0]));
+  firstIndex = 0;
+  lastIndex = showItems;
+  createShowItems(sortedArray);
+  createBtnShowMoreItems();
+  showMoreItems(sortedArray);
   addRemoveItemsInCart();
 });
 
-function createItem(value, key) {
+function createItem(value) {
   const mainItems = document.querySelector('.main__items');
   const item = document.createElement('div');
   item.className = 'main__item item';
@@ -237,7 +278,7 @@ function createItem(value, key) {
   const btnAddToCart = document.createElement('button');
   btnAddToCart.className = 'item__btn';
   btnAddToCart.innerHTML = 'add to cart';
-  btnAddToCart.setAttribute('id', `${key}`);
+  btnAddToCart.setAttribute('id', `${value.id}`);
   itemFooter.append(btnAddToCart);
 }
 
