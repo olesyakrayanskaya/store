@@ -154,17 +154,23 @@ dataItems.forEach((elem) =>
 );
 
 const localStorageMap = new Map();
-for(let i=0; i<localStorage.length; i++) {
+for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
   localStorageMap.set(`${key}`, `${localStorage.getItem(key)}`);
-};
+}
 
 const itemsInCart = new Map(localStorageMap);
+const amountItemsInCart = document.querySelector('.cart-amount');
+amountItemsInCart.innerHTML = itemsInCart.size;
 
 addEventListener('DOMContentLoaded', () => {
   dataMap.forEach((value, key) => createItem(value, key));
   openCart();
   closeCart();
+  addRemoveItemsInCart();
+});
+
+function addRemoveItemsInCart() {
   const btnAddToCartArr = document.querySelectorAll('.item__btn');
   btnAddToCartArr.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -176,7 +182,7 @@ addEventListener('DOMContentLoaded', () => {
   removeAllInCartBtn.addEventListener('click', () => {
     removeAllInCart();
   });
-});
+}
 
 let sortedMap = new Map();
 const select = document.getElementById('sort');
@@ -204,45 +210,7 @@ select.addEventListener('change', () => {
   const mainItems = document.querySelector('.main__items');
   removeAllChildNodes(mainItems);
   sortedMap.forEach((value, key) => createItem(value[1], value[0]));
-  const btnAddToCartArr = document.querySelectorAll('.item__btn');
-  btnAddToCartArr.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      let id = btn.id;
-      addToCart(id);
-    });
-  });
-  const removeAllInCartBtn = document.querySelector('.cart__remove');
-  removeAllInCartBtn.addEventListener('click', () => {
-    removeAllInCart();
-  });
-});
-
-const range = document.querySelector('.filters__range');
-const minPriceSpan = document.querySelector('.filter__min-price');
-const maxPriceSpan = document.querySelector('.filter__max-price');
-sortedMap = [...dataMap.entries()].sort((a, b) => a[1].price - b[1].price);
-let minPrice = sortedMap[0][1].price;
-let maxPrice = sortedMap[sortedMap.length - 1][1].price;
-minPriceSpan.innerHTML = minPrice;
-maxPriceSpan.innerHTML = maxPrice;
-range.addEventListener('change', () => {
-  const filterItems = [...dataMap.entries()]
-    .sort((a, b) => a[1].price - b[1].price)
-    .filter((el) => el[1].price <= range.value);
-  const mainItems = document.querySelector('.main__items');
-  removeAllChildNodes(mainItems);
-  filterItems.forEach((value, key) => createItem(value[1], value[0]));
-  const btnAddToCartArr = document.querySelectorAll('.item__btn');
-  btnAddToCartArr.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      let id = btn.id;
-      addToCart(id);
-    });
-  });
-  const removeAllInCartBtn = document.querySelector('.cart__remove');
-  removeAllInCartBtn.addEventListener('click', () => {
-    removeAllInCart();
-  });
+  addRemoveItemsInCart();
 });
 
 function createItem(value, key) {
@@ -301,6 +269,7 @@ function closeCart() {
 function addToCart(id, amount = 1) {
   itemsInCart.set(id, amount);
   localStorage.setItem(id, amount);
+  amountItemsInCart.innerHTML = itemsInCart.size;
 }
 
 function removeAllInCart() {
@@ -309,6 +278,7 @@ function removeAllInCart() {
   const totalSumItem = document.querySelector('.cart__sum');
   totalSumItem.innerHTML = 0;
   localStorage.clear();
+  amountItemsInCart.innerHTML = itemsInCart.size;
 }
 
 function clearCartItems() {
@@ -358,6 +328,7 @@ function renderCart() {
         itemsInCart.delete(id);
         cartItem.remove();
         localStorage.removeItem(id);
+        amountItemsInCart.innerHTML = itemsInCart.size;
       }
       cartItemAmount.innerHTML = amount;
       totalSum();
@@ -382,6 +353,7 @@ function renderCart() {
       cartItem.remove();
       totalSum();
       localStorage.removeItem(id);
+      amountItemsInCart.innerHTML = itemsInCart.size;
     });
   });
 }
