@@ -283,6 +283,22 @@ function createItem(value) {
     addToCart(`${value.id}`);
     btnAddToCart.innerHTML = 'in cart';
   });
+  const itemDescription = document.createElement('div');
+  itemDescription.className = 'item__description';
+  itemDescription.innerHTML = `${value.description}`;
+  item.append(itemDescription);
+  const btnShowDesc = document.createElement('button');
+  btnShowDesc.className = 'item__btn_desc';
+  btnShowDesc.innerHTML = 'show';
+  itemFooter.append(btnShowDesc);
+  btnShowDesc.addEventListener('click', () => {
+    itemDescription.classList.toggle('show');
+    if (btnShowDesc.innerHTML === 'show') {
+      btnShowDesc.innerHTML = 'hide';
+    } else {
+      btnShowDesc.innerHTML = 'show';
+    }
+  });
 }
 
 function openCart() {

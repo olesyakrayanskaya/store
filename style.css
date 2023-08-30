@@ -139,6 +139,14 @@ body {
   cursor: pointer;
 }
 
+.item__description {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
 .main__container {
   display: grid;
   grid-template-columns: 25% 1fr;
