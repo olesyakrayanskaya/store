@@ -58,7 +58,8 @@ body {
 .logo {
   width: 60px;
   height: 60px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .nav {
@@ -101,6 +102,16 @@ body {
   align-content: center;
   max-width: 900px;
   margin: 0 auto;
+  position: relative;
+  padding-bottom: 70px;
+}
+
+.main__btn {
+  position: absolute;
+  width: 150px;
+  height: 30px;
+  top: calc(100% - 50px);
+  right: calc(50% - 75px);
 }
 
 .main__item {
@@ -118,13 +129,15 @@ body {
 .item__img {
   width: 60px;
   height: 60px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .item-cart__img {
   width: 30px;
   height: 30px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .item__footer {

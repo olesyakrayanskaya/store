@@ -176,7 +176,6 @@ function createBtnShowMoreItems() {
 
 function showMoreItems(arr) {
   const btnShowMoreItems = document.querySelector('.main__btn');
-
   btnShowMoreItems.addEventListener('click', () => {
     if (firstIndex < totalNumbItems - showItems) {
       firstIndex += showItems;
@@ -286,7 +285,7 @@ function createItem(value) {
   const itemDescription = document.createElement('div');
   itemDescription.className = 'item__description';
   itemDescription.innerHTML = `${value.description}`;
-  item.append(itemDescription);
+  itemFooter.after(itemDescription);
   const btnShowDesc = document.createElement('button');
   btnShowDesc.className = 'item__btn_desc';
   btnShowDesc.innerHTML = 'show';
