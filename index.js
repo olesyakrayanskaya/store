@@ -376,10 +376,13 @@ function renderCart() {
     cartItemAmount.className = 'item-cart__amount';
     cartItemAmount.innerHTML = amount;
     cartItem.append(cartItemAmount);
+    const itemCartPlusMinus = document.createElement('div');
+    itemCartPlusMinus.className = 'item-cart__buttons';
+    cartItem.append(itemCartPlusMinus);
     const itemMinus = document.createElement('button');
     itemMinus.className = 'item-cart__minus';
     itemMinus.innerHTML = '-';
-    cartItem.append(itemMinus);
+    itemCartPlusMinus.append(itemMinus);
     itemMinus.addEventListener('click', () => {
       if (amount > 1) {
         amount -= 1;
@@ -400,7 +403,7 @@ function renderCart() {
     const itemPlus = document.createElement('button');
     itemPlus.className = 'item-cart__plus';
     itemPlus.innerHTML = '+';
-    cartItem.append(itemPlus);
+    itemCartPlusMinus.append(itemPlus);
     itemPlus.addEventListener('click', () => {
       amount += 1;
       cartItemAmount.innerHTML = amount;
@@ -410,7 +413,7 @@ function renderCart() {
     });
     const itemDel = document.createElement('button');
     itemDel.className = 'item-cart__delete';
-    itemDel.innerHTML = 'del';
+    itemDel.innerHTML = '<img class="item-cart__trash" src="./images/trash.svg" />';
     cartItem.append(itemDel);
     itemDel.addEventListener('click', () => {
       itemsInCart.delete(id);

@@ -73,8 +73,16 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid #696867;
   margin-bottom: 10px;
+}
+
+.item-cart__buttons {
+  display: flex;
+  align-items: center;
+}
+
+.item-cart__minus {
+  margin-right: 5px;
 }
 
 .item-cart__minus,
@@ -91,8 +99,16 @@ body {
 
 .item-cart__delete {
   border: none;
-  background-color: #e7ded6;
-  padding: 3px 6px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-cart__trash {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .cart__remove {
