@@ -1,12 +1,13 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  margin: 0;
-  padding: 0;
   overflow-x: hidden;
   font-family: 'Nunito', sans-serif;
+  width: 100%;
 }
 
 a {
@@ -17,10 +18,12 @@ a {
 
 button {
   cursor: pointer;
+  font-family: inherit;
 }
 
 select {
   cursor: pointer;
+  font-family: inherit;
 }
 
 body {
@@ -70,7 +73,7 @@ body {
 }
 
 .header {
-  background-color: #b8c2b7;
+  background-color: #dddcd6;
   height: 100px;
   display: flex;
   align-items: center;
@@ -108,13 +111,20 @@ body {
   text-decoration: underline;
 }
 
+.about {
+  background-color: #fff8f3;
+  padding: 20px;
+  min-height: 80px;  
+}
+
 .main {
-  background-color: #dff5c8;
+  background-color: #fffcf3;
 }
 
 .main__items {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: row;
   justify-content: space-between;
   gap: 10px;
   align-items: center;
@@ -135,21 +145,23 @@ body {
 
 .main__item {
   width: 100%;
-  height: 200px;
-  background-color: #d7d7e7;
-  border: 1px solid #242222;
+  height: 350px;
+  background-color: #f7f4ed;
   padding: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  position: relative;
 }
 
 .item__img {
-  width: 60px;
-  height: 60px;
+  width: 180px;
+  height: 180px;
   -o-object-fit: cover;
   object-fit: cover;
+  box-shadow: 3px 2px 5px #b9b7b4;
+  align-self: center;
 }
 
 .item-cart__img {
@@ -159,16 +171,52 @@ body {
   object-fit: cover;
 }
 
+.item__btn,
+.item__btn_desc {
+  padding: 5px;
+  border: none;
+  background-color: #e7ded6;
+  height: 30px;
+}
+
+.item__btn {
+  margin: 0 10px;
+  width: 100px;
+}
+
+.item__btn_desc {
+  width: 60px;
+}
+
+.item__btn:hover,
+.item__btn_desc:hover {
+  background-color: #c7c4c2;
+}
+
 .item__footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
 }
 
 .item__description {
   display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background-color: #e7ded6be;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.item__text {
+  padding: 15px;
+  overflow-y: hidden;
 }
 
 .main__container {
@@ -178,15 +226,11 @@ body {
   margin: 0 auto;
 }
 
-.filters {
-  background-color: #b9c6c7;
-}
-
 .footer {
-  background-color: #6b6d69;
+  background-color: #dddcd6;
   height: 60px;
 }
 
 .show {
-  display: block;
+  display: flex;
 }

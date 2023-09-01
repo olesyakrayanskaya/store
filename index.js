@@ -33,7 +33,7 @@ const dataItems = [
     name: 'item-5',
     price: 15,
     description: 'description-5',
-    img: './images/5.webp',
+    img: './images/5.avif',
   },
   {
     id: 6,
@@ -284,8 +284,11 @@ function createItem(value) {
   });
   const itemDescription = document.createElement('div');
   itemDescription.className = 'item__description';
-  itemDescription.innerHTML = `${value.description}`;
-  itemFooter.after(itemDescription);
+  name.after(itemDescription);
+  const descriptionText = document.createElement('p');
+  descriptionText.className = 'item__text';
+  descriptionText.innerHTML = `${value.description}`;
+  itemDescription.append(descriptionText);
   const btnShowDesc = document.createElement('button');
   btnShowDesc.className = 'item__btn_desc';
   btnShowDesc.innerHTML = 'show';
