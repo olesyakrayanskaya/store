@@ -370,7 +370,7 @@ function renderCart() {
     cartItem.append(cartItemName);
     const cartItemPrice = document.createElement('div');
     cartItemPrice.className = 'item-cart__price';
-    cartItemPrice.innerHTML = `${dataMap.get(+id).price}`;
+    cartItemPrice.innerHTML = `price: ${dataMap.get(+id).price}`;
     cartItem.append(cartItemPrice);
     const cartItemAmount = document.createElement('div');
     cartItemAmount.className = 'item-cart__amount';
@@ -410,7 +410,7 @@ function renderCart() {
     });
     const itemDel = document.createElement('button');
     itemDel.className = 'item-cart__delete';
-    itemDel.innerHTML = 'Delete';
+    itemDel.innerHTML = 'del';
     cartItem.append(itemDel);
     itemDel.addEventListener('click', () => {
       itemsInCart.delete(id);
@@ -431,5 +431,5 @@ function totalSum() {
   itemsInCart.forEach((amount, id, itemsInCart) => {
     totalSum += dataMap.get(+id).price * amount;
   });
-  sumItem.innerHTML = totalSum;
+  sumItem.innerHTML = `total sum: ${totalSum}`;
 }
