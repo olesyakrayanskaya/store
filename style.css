@@ -8,6 +8,7 @@ html {
   overflow-x: hidden;
   font-family: 'Nunito', sans-serif;
   width: 100%;
+  height: 100%;
 }
 
 a {
@@ -27,10 +28,13 @@ select {
 }
 
 body {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  padding-top: 80px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1 0 auto;
 }
 
 .cart {
@@ -108,6 +112,7 @@ body {
 .item-cart__trash {
   width: 20px;
   height: 20px;
+  -o-object-fit: contain;
   object-fit: contain;
 }
 
@@ -138,8 +143,6 @@ body {
 
 .header {
   background-color: #dddcd6;
-  display: flex;
-  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -149,12 +152,23 @@ body {
   box-shadow: 3px 2px 5px #b9b7b4;
 }
 
+.header .container {
+  align-items: flex-end;
+}
+
 .logo {
   width: 60px;
   height: 60px;
   -o-object-fit: contain;
   object-fit: contain;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  align-self: flex-start;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  fill: #74572c;
 }
 
 .nav {
@@ -227,15 +241,16 @@ body {
   max-width: 900px;
   margin: 0 auto;
   position: relative;
-  padding-bottom: 70px;
 }
 
 .main__btn {
   position: absolute;
-  width: 150px;
-  height: 30px;
-  top: calc(100% - 50px);
+  width: 120px;
+  height: 20px;
+  top: calc(100% + 25px);
   right: calc(50% - 75px);
+  border: none;
+  background-color: #e7ded6;
 }
 
 .main__item {
@@ -314,18 +329,61 @@ body {
   overflow-y: hidden;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 auto;
+  padding-bottom: 80px;
+}
+
 .main__container {
-  display: grid;
-  grid-template-columns: 25% 1fr;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.filters {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 150px;
+}
+
+.filters label {
+  margin-right: 20px;
+}
+
+.filters__sort {
+  background-color: #e7ded6;
+  border: none;
+  padding: 5px;
+  width: 180px;
+  height: 35px;
+  outline: none;
 }
 
 .footer {
   background-color: #dddcd6;
   height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
 }
 
 .show {
   display: flex;
+}
+
+@media (max-width: 1200px) {
+  .main__items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .main__items {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

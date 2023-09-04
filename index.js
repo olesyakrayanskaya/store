@@ -413,7 +413,8 @@ function renderCart() {
     });
     const itemDel = document.createElement('button');
     itemDel.className = 'item-cart__delete';
-    itemDel.innerHTML = '<img class="item-cart__trash" src="./images/trash.svg" />';
+    itemDel.innerHTML =
+      '<img class="item-cart__trash" src="./images/trash.svg" />';
     cartItem.append(itemDel);
     itemDel.addEventListener('click', () => {
       itemsInCart.delete(id);
