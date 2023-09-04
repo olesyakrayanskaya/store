@@ -129,9 +129,6 @@ body {
   background-color: #e7ded6;
 }
 
-.cart__sum {
-}
-
 .cart__footer {
   display: flex;
   justify-content: space-between;
