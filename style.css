@@ -5,10 +5,21 @@
 }
 
 html {
-  overflow-x: hidden;
-  font-family: 'Nunito', sans-serif;
-  width: 100%;
   height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  caret-color: transparent;
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.wrapper {
+  flex: 1 0 auto;
 }
 
 a {
@@ -33,10 +44,6 @@ body {
   flex-direction: column;
 }
 
-.wrapper {
-  flex: 1 0 auto;
-}
-
 .cart {
   display: none;
   position: fixed;
@@ -52,11 +59,11 @@ body {
 }
 
 .cart__inner {
-  width: 30%;
-  min-height: 400px;
+  width: 50%;
+  min-height: 200px;
   background-color: #f7f4f1;
   padding: 20px;
-  position: relative;
+  max-width: 500px;
 }
 
 .cart__header {
@@ -117,18 +124,18 @@ body {
 }
 
 .cart__remove {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
   padding: 5px;
   border: none;
   background-color: #e7ded6;
 }
 
 .cart__sum {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
+}
+
+.cart__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .container {
@@ -139,6 +146,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  padding: 0 20px;
 }
 
 .header {
@@ -148,8 +156,8 @@ body {
   left: 0;
   z-index: 200;
   width: 100%;
-  height: 80px;
   box-shadow: 3px 2px 5px #b9b7b4;
+  flex: 0 0 auto;
 }
 
 .header .container {
@@ -178,6 +186,7 @@ body {
   align-items: center;
   width: 40%;
   padding: 10px 20px;
+  flex-wrap: wrap;
 }
 
 .nav__link {
@@ -222,7 +231,7 @@ body {
 
 .about {
   background-color: #fff8f3;
-  padding: 20px;
+  padding: 120px 20px 10px;
   min-height: 80px;
 }
 
@@ -334,7 +343,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  flex: 1 0 auto;
   padding-bottom: 80px;
 }
 
@@ -376,14 +384,42 @@ body {
   display: flex;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
   .main__items {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .nav {
+    width: 70%;
+    justify-content: center;
+  }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 670px) {
+  .cart__inner {
+    width: 70%;
+  }
+}
+
+@media (max-width: 590px) {
   .main__items {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .cart__inner {
+    width: 100%;
+    padding: 5px;
+  }
+  /* .cart__item {
+    flex-direction: column;
+    align-items: flex-start;
+  } */
+}
+
+@media (max-width: 430px) {
+  .about {
+    display: none;
   }
 }
