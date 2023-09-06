@@ -269,7 +269,21 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
-  animation: visibility 1s linear;
+  -webkit-animation: visibility 1s linear;
+          animation: visibility 1s linear;
+}
+
+@-webkit-keyframes visibility {
+  from {
+    opacity: 0;
+    transform: translateY(200px);
+    transition: opacity 0.2s ease-in-out, transform 0.1s linear;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes visibility {
